@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoostX Mini Landing</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #0c0c0f;
+    color: #e4e4e7;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #111114;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid #222;
+  }
+  header button {
+    background: #111114;
+    border: 1px solid #22c55e;
+    color: #22c55e;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  main {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  h1, h2 {
+    color: #22c55e;
+  }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  p {
+    margin-bottom: 1rem;
+    color: #a1a1aa;
+  }
+  .btn-main {
+    background: #22c55e;
+    color: #0c0c0f;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .btn-main:hover {
+    transform: scale(1.05);
+  }
+  canvas {
+    margin-top: 1rem;
+    border-radius: 12px;
+    background: #111114;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  ul {
+    padding-left: 1.5rem;
+  }
+  li {
+    margin-bottom: 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <button onclick="window.open('https://t.me/MyCoinLab', '_blank')">Support</button>
+  <button onclick="window.open('https://predictorai.github.io/BoostX/', '_blank')">Deposit</button>
+</header>
+
+<main>
+  <!-- Hero / Welcome -->
+  <section>
+    <h1>Welcome to BoostX Mini</h1>
+    <p>Track your portfolio, watch your growth, and explore our features. Start earning with P2P and Futures!</p>
+    <button class="btn-main" onclick="location.href='https://predictorai.github.io/BoostX/'">Go to Main Site</button>
+    <canvas id="chart" width="500" height="250"></canvas>
+  </section>
+
+  <!-- About -->
+  <section>
+    <h2>About BoostX</h2>
+    <p>BoostX is a AI trading platform, P2P trades, and futures trading.</p>
+  </section>
+
+  <!-- P2P Info -->
+  <section>
+    <h2>P2P Marketplace</h2>
+    <p>Buy and sell assets directly with other users. Explore multiple payment methods and competitive rates. Start small and grow your bslance step by step!</p>
+    <ul>
+      <li>USDT, BTC, ETH support</li>
+      <li>Bank transfer, cards, P2P escrow</li>
+      <li>Ratings for each seller</li>
+    </ul>
+  </section>
+
+  <!-- Features -->
+  <section>
+    <h2>Features</h2>
+    <ul>
+      <li>Futures trading</li>
+      <li>Interactive charts with animations</li>
+      <li>Demo balance to explore all functions</li>
+      <li>AI-bot guidance and tips</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+  const canvas = document.getElementById('chart');
+  const ctx = canvas.getContext('2d');
+
+  const data = Array.from({length: 30}, (_, i) => ({
+    x: i,
+    y: 50 + Math.sin(i / 3) * 20 + i
+  }));
+
+  let t = 0;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height - data[0].y);
+    for (let i = 1; i < data.length; i++) {
+      const y = canvas.height - (data[i].y + Math.sin(t + i / 5) * 5);
+      ctx.lineTo(i * (canvas.width / data.length), y);
+    }
+    ctx.strokeStyle = '#22c55e';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    t += 0.05;
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
+
+</body>
+</html>
